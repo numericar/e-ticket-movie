@@ -1,0 +1,9 @@
+
+    :: dotnet run
+    run project.
+
+    :: dotnet ef migrations add <name>
+    create migration.
+
+    :: dotnet ef database update
+    push changed model to database for update.
