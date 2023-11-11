@@ -1,4 +1,5 @@
 using eTicket.Data;
+using eTicket.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,10 @@ builder.Services.AddDbContext<AppDbContext>(options => {
     string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+// Add service to container
+builder.Services.AddScoped<IActorService, ActorService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

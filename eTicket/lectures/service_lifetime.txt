@@ -1,0 +1,11 @@
+
+    ::Service Lifttime
+
+    - Singleton
+    สร้างคตรั้งเดียว และจะคงอยู่ตลอดจนกว่าโปรแกรมจะถูกปิดการทำงาน
+
+    - Scoped
+    สร้างขึ้น 1 ครั้งต่อหนึ่ง request
+
+    - Transiet
+    ถูกสร้างขึ่นทุกครั้งที่มี request และจะมีการสร้าง instance ใหม่ของ Service ให้กับทุก controller
