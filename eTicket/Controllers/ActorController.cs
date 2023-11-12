@@ -1,5 +1,6 @@
 using eTicket.Data;
 using eTicket.Data.Services;
+using eTicket.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,21 @@ namespace eTicket.Controllers
         public ViewResult Create()
         {
             return View();
+        }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([Bind("FullName, ProfilePictureURL, Bio")] Actor actor)
+        {
+            // Validate model is not valid
+            if (!ModelState.IsValid)
+            {
+                // return data to view with model state error
+                return View(actor);
+            }
+
+            await _actorService.Add(actor);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

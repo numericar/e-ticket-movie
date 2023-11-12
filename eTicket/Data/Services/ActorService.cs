@@ -24,9 +24,10 @@ namespace eTicket.Data.Services
         }
 
 
-        public Task Add(Actor actor)
+        public async Task Add(Actor actor)
         {
-            throw new NotImplementedException();
+            await _context.Actors.AddAsync(actor);
+            await _context.SaveChangesAsync();
         }
 
         public Task Update(int id, Actor newActor)
