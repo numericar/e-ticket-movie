@@ -33,6 +33,7 @@ namespace eTicket.Data.Services
         public async Task Update(int id, Actor newActor)
         {
             _context.Actors.Update(newActor);
+            await _context.SaveChangesAsync();
         }
 
         public Task DeleteById(int id)

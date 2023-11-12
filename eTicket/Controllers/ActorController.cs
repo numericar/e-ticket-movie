@@ -53,5 +53,28 @@ namespace eTicket.Controllers
 
             return View("detail", actor);
         }
+
+        [HttpGet("{id}/edit")]
+        public async Task<ViewResult> Edit(int id)
+        {
+            var actor = await _actorService.GetById(id);
+
+            if (actor == null) return View("Not Found");
+
+            return View(actor);
+        }
+
+        [HttpPost("{id}/edit")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, FullName, ProfilePictureURL, Bio")] Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+
+            await _actorService.Update(id, actor);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
