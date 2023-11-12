@@ -1,8 +1,6 @@
-using eTicket.Data;
 using eTicket.Data.Services;
 using eTicket.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Controllers
 {
@@ -73,6 +71,28 @@ namespace eTicket.Controllers
             }
 
             await _actorService.Update(id, actor);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("{id}/delete")]
+        public async Task<ViewResult> DeleteConfirmed(int id)
+        {
+            var actor = await _actorService.GetById(id);
+
+            if (actor == null) return View("delete", "Not Found");
+
+            return View("delete", actor);
+        }
+
+        [HttpPost("{id}/delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var actor = await _actorService.GetById(id);
+
+            if (actor == null) return View("Not Found");
+
+            await _actorService.DeleteById(id);
 
             return RedirectToAction(nameof(Index));
         }
