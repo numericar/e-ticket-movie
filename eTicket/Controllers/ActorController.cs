@@ -47,7 +47,7 @@ namespace eTicket.Controllers
         {
             var actor = await _actorService.GetById(id);
 
-            if (actor == null) return View("detail", "Empty");
+            if (actor == null) return View("NotFound");
 
             return View("detail", actor);
         }
@@ -57,7 +57,7 @@ namespace eTicket.Controllers
         {
             var actor = await _actorService.GetById(id);
 
-            if (actor == null) return View("Not Found");
+            if (actor == null) return View("NotFound");
 
             return View(actor);
         }
@@ -80,7 +80,7 @@ namespace eTicket.Controllers
         {
             var actor = await _actorService.GetById(id);
 
-            if (actor == null) return View("delete", "Not Found");
+            if (actor == null) return View("NotFound");
 
             return View("delete", actor);
         }
@@ -90,7 +90,7 @@ namespace eTicket.Controllers
         {
             var actor = await _actorService.GetById(id);
 
-            if (actor == null) return View("Not Found");
+            if (actor == null) return View("NotFound");
 
             await _actorService.DeleteById(id);
 
