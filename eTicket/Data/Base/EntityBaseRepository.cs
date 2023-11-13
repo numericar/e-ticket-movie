@@ -32,5 +32,7 @@ namespace eTicket.Data.Base
             EntityEntry entityEntry = _context.Entry<T>(entity);
             entityEntry.State = EntityState.Deleted;
         }
+
+        public async Task CompleteAsync() => await _context.SaveChangesAsync();
     }
 }

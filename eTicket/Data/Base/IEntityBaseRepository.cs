@@ -7,5 +7,6 @@ namespace eTicket.Data.Base
         Task AddAsync(T entity);
         public void UpdateAsync(T entity);
         Task RemoveAsync(int id); 
+        Task CompleteAsync();
     }
 }

@@ -1,47 +1,13 @@
+using eTicket.Data.Base;
 using eTicket.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Data.Services
 {
-    public class ActorService : IActorService
+    public class ActorService : EntityBaseRepository<Actor>
     {
-        private readonly AppDbContext _context;
-
-        public ActorService(AppDbContext context)
+        public ActorService(AppDbContext context) : base(context)
         {
-            _context = context;
-        }
 
-        public async Task<IEnumerable<Actor>> GetAll()
-        {
-            var actors = await _context.Actors.ToListAsync();
-            return actors;
-        }
-
-        public async Task<Actor> GetById(int id)
-        {
-            var actor = await _context.Actors.FirstOrDefaultAsync(x => x.Id == id);
-            return actor;
-        }
-
-        public async Task Add(Actor actor)
-        {
-            await _context.Actors.AddAsync(actor);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task Update(int id, Actor newActor)
-        {
-            _context.Actors.Update(newActor);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteById(int id)
-        {
-            var actor = await this.GetById(id);
-
-            _context.Actors.Remove(actor);
-            await _context.SaveChangesAsync();
         }
     }
 }
