@@ -3,7 +3,7 @@ using eTicket.Models;
 
 namespace eTicket.Data.Services
 {
-    public class ActorService : EntityBaseRepository<Actor>
+    public class ActorService : EntityBaseRepository<Actor>, IActorService
     {
         public ActorService(AppDbContext context) : base(context)
         {
