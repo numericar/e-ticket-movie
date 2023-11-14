@@ -1,0 +1,59 @@
+@model Producer
+
+@{
+    ViewData["Title"] = "Edit producer";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+        <h1>Edit producer</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group text-center">
+                        <img src="" class="border-info rounded-circle" id="ProfilePicturePreview"
+                            style="width: 200px; height: 200px; object-fit: cover;" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProfilePictureURL" class="control-label"></label>
+                        <input asp-for="ProfilePictureURL" type="text" class="form-control" id="ProfilePictureURL">
+                        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" type="text" class="form-control">
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Bio" class="control-label"></label>
+                        <input asp-for="Bio" type="text" class="form-control">
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-controller="Actor" asp-action="Index">Show all</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(() => {
+            let inputImage = document.getElementById("ProfilePictureURL");
+            let previewImage = document.getElementById("ProfilePicturePreview");
+            previewImage.src = inputImage.value;
+        });
+
+        $("#ProfilePictureURL").on("change", () => {
+            let inputImage = document.getElementById("ProfilePictureURL");
+            let previewImage = document.getElementById("ProfilePicturePreview");
+            previewImage.src = inputImage.value;
+        });
+    </script>
+}
