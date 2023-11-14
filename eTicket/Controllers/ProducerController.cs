@@ -1,23 +1,32 @@
-using eTicket.Data;
+using eTicket.Data.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Controllers
 {
     [Route("[controller]")]
     public class ProducerController : Controller
     {
-        private readonly AppDbContext context;
+        private readonly IProducerService _producerService;
 
-        public ProducerController(AppDbContext context)
+        public ProducerController(IProducerService producerService)
         {
-            this.context = context;
+            _producerService = producerService;
         }
 
         public async Task<ViewResult> Index()
         {
-            var producers = await this.context.Producers.ToListAsync();
+            var producers = await _producerService.GetAllAsync();
             return View("index", producers);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ViewResult> Detail(int id)
+        {
+            var producer = await _producerService.GetByIdAsync(id);
+
+            if (producer == null) return View("NotFound");
+
+            return View(producer);
         }
     }
 }
